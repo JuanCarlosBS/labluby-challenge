@@ -66,7 +66,7 @@ class UserController {
   async update(request, response) {
     const { id } = request.params;
 
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { id } });
 
     if (!user) {
       return response.status(404).json({ error: 'User not found' });
@@ -74,21 +74,30 @@ class UserController {
 
     const { name, email, location, avatar, username, bio } = request.body;
 
-    const changedEmail = email !== user.email;
-
-    const emailAlreadyTaken = null;
-
-    if (changedEmail) {
-      const emailAlreadyTaken = await User.findOne({
-        where: { email },
-      });
-    }
+    const emailAlreadyTaken = await User.findOne({
+      where: { email },
+    });
 
     if (emailAlreadyTaken) {
       return response.status(401).json({ error: 'not authorized' });
     }
 
-    await user.save();
+    const usernameAlreadyTaken = await User.findOne({
+      where: { email },
+    });
+
+    if (usernameAlreadyTaken) {
+      return response.status(401).json({ error: 'not authorized' });
+    }
+
+    const { active } = await user.update({
+      name,
+      email,
+      location,
+      avatar,
+      username,
+      bio,
+    });
 
     return response.json({
       name,

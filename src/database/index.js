@@ -1,10 +1,11 @@
 import Sequelize from 'sequelize';
 import User from '../app/models/User';
 import Token from '../app/models/Token';
+import Follow from '../app/models/Follow';
 
 import databaseConfig from '../config/database';
 
-const models = [User, Token];
+const models = [User, Token, Follow];
 
 class Database {
   constructor() {
