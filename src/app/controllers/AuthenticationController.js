@@ -23,8 +23,8 @@ class AuthenticationController {
       return response.status(401).json({ error: 'not authorized' });
     }
 
-    const tokencreated = await Token.create({ user_id: id });
-    return response.json({ message: 'sim' });
+    const tokenCreated = await Token.create({ user_id: id });
+    return response.json(tokenCreated);
   }
 }
 
