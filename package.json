@@ -10,7 +10,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "slugify": "^1.4.7"
   },
   "devDependencies": {
     "eslint": "^7.19.0",
