@@ -73,6 +73,22 @@ class FollowController {
       where: { user_follower_id: idFollower, user_following_id: idFollowing },
     });
 
+    const follower = await User.findOne({
+      where: { id: idFollower },
+    });
+
+    if (!follower) {
+      return response.status(401).json({ error: 'not found' });
+    }
+
+    const following = await User.findOne({
+      where: { id: idFollowing },
+    });
+
+    if (!following) {
+      return response.status(404).json({ error: 'not found' });
+    }
+
     if (followAlreadyTaken) {
       return response.status(401).json({ error: 'not authorized' });
     }

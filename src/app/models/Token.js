@@ -4,7 +4,7 @@ class Token extends Model {
   static init(sequelize) {
     super.init(
       {
-        user_id: Sequelize.STRING,
+        user_id: Sequelize.INTEGER,
       },
       { sequelize },
     );

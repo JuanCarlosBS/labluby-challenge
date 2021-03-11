@@ -82,6 +82,10 @@ class RepositoryController {
       where: { id: userID },
     });
 
+    if (!user) {
+      return response.status(404).json({ error: 'not found' });
+    }
+
     const slug = slugify(`${user.name}-${repository.name}`);
 
     const { active } = await repository.update({

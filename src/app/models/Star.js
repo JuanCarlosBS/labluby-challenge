@@ -1,14 +1,11 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Repository extends Model {
+class Star extends Model {
   static init(sequelize) {
     super.init(
       {
         user_id: Sequelize.INTEGER,
-        name: Sequelize.STRING,
-        description: Sequelize.STRING,
-        public_repository: Sequelize.BOOLEAN,
-        slug: Sequelize.STRING,
+        repository_id: Sequelize.INTEGER,
       },
       { sequelize },
     );
@@ -21,7 +18,11 @@ class Repository extends Model {
       foreign_key: 'user_id',
       as: 'users',
     });
+    this.belongsTo(models.Repository, {
+      foreign_key: 'repository_id',
+      as: 'repositories',
+    });
   }
 }
 
-export default Repository;
+export default Star;
